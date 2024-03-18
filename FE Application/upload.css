@@ -1,0 +1,81 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+body{
+    background-image: url("new11.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.nav{
+    font-size: larger;
+    border:1px solid gray;
+    max-width: 250px;
+    height:700px;
+    background-color: rgb(124, 176, 220);
+    display: inline-block;
+    position: relative;
+}   
+
+
+
+.nav a{
+    padding: 5px;
+    text-decoration: none;
+    color: rgb(14, 8, 8);
+    }
+.nav button{
+    height:70px;
+    -webkit-margin-collapse: collapse;
+    border:1px solid gray;
+    width:250px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: rgb(124, 176, 220);
+    font-size: medium;
+}
+.nav button:hover{
+    background-color: rgb(51, 149, 236);
+    color: black;
+}
+form{
+    max-width: 1500px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    color: rgb(10, 10, 10);
+    display: flexbox;
+    padding: 50px;
+    display: inline-block;
+    margin-right:330px;
+    margin-bottom: 100px;
+    margin-left: 0px;
+    margin-top: 0px;
+    background-color: rgb(254, 254, 254);
+    
+}
+form button{
+	background-color: rgb(46, 145, 46);
+	color: white;
+  font-size: medium;
+  float: right;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 8px;
+}
+form button:hover{
+	background-color: rgb(24, 202, 75);
+}
+.name{
+    width: 227px;
+    margin-left: 70px;
+    display: inline-block;
+    position: relative;
+    font-size: larger;
+    line-height: 3;
+  }

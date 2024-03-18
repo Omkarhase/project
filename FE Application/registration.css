@@ -1,0 +1,72 @@
+body{
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100;
+    background-color: rgb(185, 184, 184);
+    display: flexbox;
+    flex-wrap: nowrap;
+}
+form{
+    border:2px solid black;
+    color: rgb(10, 10, 10);
+    display: flexbox;
+    padding: 50px;
+    display: inline-block;
+    margin-right:100px;
+    margin-bottom: 100px;
+    margin-left: 100px;
+    margin-top: 0px;
+    background-color: rgb(254, 254, 254);
+    
+}
+.name{
+  width: 227px;
+  margin-left: 70px;
+  display: inline-block;
+  position: relative;
+  font-size: medium;
+  line-height: 3;
+}
+form button{
+	background-color: rgb(46, 145, 46);
+	color: white;
+  font-size: medium;
+}
+form button:hover{
+	background-color: rgb(24, 202, 75);
+}
+.nav{
+  text-align:left;
+  font-size: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  -webkit-margin-bottom-collapse: collapse;
+}
+.nav>button{
+	position:relative;
+  text-decoration: none;
+  font-size: larger;
+    width: 180px;
+    height: 50px;
+    text-align: center;
+    border-collapse: separate;
+    border: 1px solid grey;
+    background-color: rgb(118, 243, 143);
+    font-family: Garamond, serif;
+    font-size: medium;
+  }
+  .nav button:hover{
+    background-color: rgb(41, 195, 72);
+    box-shadow: 2px 2px 15px black;
+    font-size: large;
+}
+.error {
+  color: red;
+  font-size: 10px;
+  margin-top: 0px;
+}
+
+.error-border {
+  border: 2px solid red;
+}
