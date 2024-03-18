@@ -1,7 +1,7 @@
 from flask import Flask, request
 import psycopg2
 from flask_cors import CORS  # Import CORS from flask_cors module
-
+print("change")
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
