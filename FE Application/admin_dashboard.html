@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+    <div id="admin-dashboard"></div>
+
+    <script>
+        function viewDocument(base64String) {
+            var binaryString = atob(base64String);
+            var len = binaryString.length;
+            var bytes = new Uint8Array(len);
+            for (var i = 0; i < len; ++i) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            var blob = new Blob([bytes]);
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.target = '_blank';
+            link.click();
+        }
+
+        // Fetch data from Flask backend
+        fetch('http://127.0.0.1:5000/admin/dashboard')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Fetched data:', data);
+                if (!Array.isArray(data)) {
+                    throw new Error('Invalid data format: not an array');
+                }
+                let html = '<table border="1"><tr><th>Username</th><th>First Name</th><th>Middle Name</th><th>Last Name</th><th>Age</th><th>Gender</th><th>Date of Birth</th><th>Mobile Number</th><th>Aadhar Number</th><th>Aadhar Document</th><th>Bank Account Number</th><th>Bank Passbook Document</th><th>Seven Twelve Document</th><th>Eight A Document</th></tr>';
+                data.forEach(row => {
+                    html += '<tr>';
+                    html += `<td>${row.username}</td>`;
+                    html += `<td>${row.firstname}</td>`;
+                    html += `<td>${row.middlename}</td>`;
+                    html += `<td>${row.lastname}</td>`;
+                    html += `<td>${row.age}</td>`;
+                    html += `<td>${row.gender}</td>`;
+                    html += `<td>${row.dob}</td>`;
+                    html += `<td>${row.mobileno}</td>`;
+                    html += `<td>${row.aadhar_number}</td>`;
+                    html += `<td><a href="#" onclick="viewDocument('${row.aadhar_document_base64}')">View</a></td>`;
+                    html += `<td>${row.bank_acc_number}</td>`;
+                    html += `<td><a href="#" onclick="viewDocument('${row.bank_passbook_doc_base64}')">View</a></td>`;
+                    html += `<td><a href="#" onclick="viewDocument('${row.seven_twelve_doc_base64}')">View</a></td>`;
+                    html += `<td><a href="#" onclick="viewDocument('${row.eight_a_doc_base64}')">View</a></td>`;
+                    html += '</tr>';
+                });
+                html += '</table>';
+
+                document.getElementById('admin-dashboard').innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+
+</html>

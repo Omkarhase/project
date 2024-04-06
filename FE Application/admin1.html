@@ -14,30 +14,26 @@
             <h1>
     </div>
     <div class="cont2">
-        <button type="button">Home</button><br>
+        <button type="button"><a href="newproject.html">HOME</a></button><br>
         <button type="button">About us</button><br>
-        <button type="button"><a href="admin1.html">Admin Login</a></button><br>
     </div>
 
     <div class="form">
     <form >
         <center>
-            <h1 style="color:red;" font-family="serif;">User Login</h1>
+            <h1 style="color:red;" font-family="serif;">Admin Login</h1>
         </center><br>
         <label class="adi">User Name/E-mail:</label>
         <input type="text" id="usernameInput"><br><br>
         <label class="adi">Password:</label>
         <input type="password" id="passwordInput"><br><br>
-        <center><button type="button" onclick="login()">Login</button><br><br></center>
-        <center><a href="registration .html"><b>New Registration</b></a></center>
+        <center><button type="button" onclick="adminLogin()">Login</button><br><br></center>
+        
     </form>
-   </div>
-    <div class="cont3">
-        <legend>NEWS UPDATE</legend>
     </div>
-
+     
     <script>
-        function login() {
+        function adminLogin() {
             var username = document.getElementById("usernameInput").value;
             var password = document.getElementById("passwordInput").value;
 
@@ -47,7 +43,7 @@
                 password: password
             };
 
-            fetch('http://127.0.0.1:5000/login', {
+            fetch('http://127.0.0.1:5000/admin/login', {
                 method: 'POST', // Assuming the API endpoint accepts POST requests
                 headers: {
                     'Content-Type': 'application/json'
@@ -75,7 +71,5 @@
                 });
         }
     </script>
-
-</body>
-
-</html>
+    </body>
+    </html>

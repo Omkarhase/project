@@ -1,0 +1,93 @@
+from flask import Flask, request, jsonify, send_file
+import psycopg2
+
+app = Flask(__name__)
+
+# Database configuration
+DB_NAME = 'your_db_name'
+DB_USER = 'your_db_user'
+DB_PASSWORD = 'your_db_password'
+DB_HOST = 'your_db_host'
+DB_PORT = 'your_db_port'
+
+# Connect to PostgreSQL database
+def connect_to_db():
+    try:
+        connection = psycopg2.connect(
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD,
+            host=DB_HOST,
+            port=DB_PORT
+        )
+        return connection
+    except Exception as e:
+        print("Error connecting to the database:", e)
+        return None
+
+# Endpoint to fetch binary data
+@app.route('/fetch-binary', methods=['GET'])
+def fetch_binary():
+    username = request.args.get('username')
+
+    connection = connect_to_db()
+    if connection:
+        try:
+            cursor = connection.cursor()
+            cursor.execute("SELECT aadhar_document FROM documents WHERE username = %s", (username,))
+            binary_data = cursor.fetchone()[0]
+            cursor.close()
+            connection.close()
+            return send_file(binary_data, attachment_filename='aadhar_document.pdf', mimetype='application/pdf')
+        except Exception as e:
+            print("Error fetching binary data:", e)
+            return jsonify({'error': 'Failed to fetch binary data'}), 500
+    else:
+        return jsonify({'error': 'Failed to connect to database'}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+==============================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Preview</title>
+</head>
+<body>
+    <div id="preview-container"></div>
+
+    <script>
+        function fetchBinaryAndDisplayPreview(username) {
+            fetch(`/fetch-binary?username=${username}`)
+            .then(response => response.blob())
+            .then(blob => {
+                const objectURL = URL.createObjectURL(blob);
+                const fileType = blob.type;
+
+                if (fileType.startsWith('image/')) {
+                    // Display image preview
+                    const img = document.createElement('img');
+                    img.src = objectURL;
+                    document.getElementById('preview-container').appendChild(img);
+                } else {
+                    // Handle other file types (e.g., PDF, etc.)
+                    // You may need to use different methods to display previews for different file types
+                    console.log('Preview not supported for this file type');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching binary data:', error);
+            });
+        }
+
+        // Example usage:
+        fetchBinaryAndDisplayPreview('example_username');
+    </script>
+</body>
+</html>
