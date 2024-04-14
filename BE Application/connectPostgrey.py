@@ -9,7 +9,7 @@ CORS(app)  # Enable CORS for all routes
 connection = psycopg2.connect(
             dbname="Project",
             user="postgres",
-            # password="your_password",
+            #password="your_password",
             host="localhost",
             port="5432"
         )

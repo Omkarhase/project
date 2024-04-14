@@ -175,7 +175,7 @@
             // Password validation
             if (!/(?=.*\d)(?=.*[A-Z])(?=.*\W).{8,}/.test(password)) {
                 document.getElementById("password").classList.add('error-border');
-                document.getElementById("passwordError").textContent = "Password must contain at least 8 characters";
+                document.getElementById("passwordError").textContent = "Password must contain at least 8 characters or one Special Character";
                 isValid = false;
             }
 
