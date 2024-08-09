@@ -97,3 +97,11 @@ body {
       .form a:hover{
         color: red;
       }
+
+      .form img{
+        height: 15px;
+        position: absolute;
+        top:147px;
+        right: 40px;
+      
+      }

@@ -2,9 +2,14 @@ from flask import Flask, request, jsonify
 import psycopg2
 from flask_cors import CORS  # Import CORS from flask_cors module
 import base64
+from email.message import EmailMessage
+import smtplib
+sender = "pradeepkumar.sf123@gmail.com"
+
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+CORS(app, resources={r"/forgotPassword": {"origins": "*"}})
 
 connection = psycopg2.connect(
             dbname="Project",
@@ -31,7 +36,7 @@ def login():
             return {'data': "Logged In successfull"}, 200
         else: 
             return {'message': 'Incorrect username or password'}, 200
-        
+            
         connection.close()
         return {'data': rows}, 200
     except psycopg2.Error as e:
@@ -269,9 +274,151 @@ def admin_dashboard():
         return jsonify({'error': str(e)})
 
 
+@app.route('/forgotPassword', methods=['GET'])
+def forgotPassword():
+    try:
+         # Retrieve data from the request body
+        username = request.args.get('username')
+      
+
+        query = "SELECT * FROM login WHERE username = %s"
+        cursor.execute(query, (username,))
+        rows = cursor.fetchall()
+       # Fetch column names from cursor description
+        column_names = [desc[0] for desc in cursor.description]
+
+        # Convert rows to dictionaries with column names as keys
+        data = []
+        for row in rows:
+            row_dict = {}
+            for i in range(len(column_names)):
+                row_dict[column_names[i]] = row[i]
+            data.append(row_dict)
+        if data:
+            
+            fullname = data[0]['firstname'] + " " + data[0]['middlename'] + " " + data[0]['lastname']
+            mailsender(sender, username, data[0]['password'], fullname)
+            return jsonify({'status': 'success', 'message': 'Email sent successfully!'})
+        else: 
+            return {'message': 'Incorrect username '}, 200
+        
+        connection.close()
+       
+    except psycopg2.Error as e:
+        return {'error': str(e)}, 500
+
+def send_email(sender, recipient, subject, email_message):
+    try:
+        # Create the email message
+        email = EmailMessage()
+        email['Subject'] = subject
+        email['From'] = sender
+        email['To'] = recipient
+        email.set_content(email_message)
+        # Connect to the SMTP server
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(sender, 'sccvujqvokutqfti')
+
+            # Send the email
+            server.send_message(email)
+
+        # Return a success indicator
+        return True
+    except Exception as e:
+        # Print or log the exception for debugging
+        print(f"An error occurred: {e}")
+        # Return a failure indicator
+        return False
+
+def mailsender(sender, username, password, fullname):
+    try:
+        subject = "Forgot password for Upscale Sugar Factory Solutions"
+
+        email_message = f"""
+                Dear {fullname},
+
+                    We have received a request for forgot password so we have checked that you are a authorize user. We are sharing your current password - {password}.
+
+                    If you did not request a password request, please ignore this email. If you haven't done it please reach out to paramvirpatil278@gmail.com.
+
+                Thank you,
+                Upscale Sugar Factory Solutions
+                """
+
+        # Send the email
+        result = send_email(sender, username, subject, email_message)
+        
+        if result:
+            # Return a success response
+            return jsonify({'status': 'success', 'message': 'Email sent successfully!'})
+        else:
+            # Return a failure response
+            return jsonify({'status': 'error', 'message': 'Failed to send email.'})
+
+    except Exception as e:
+        return {"error": f"An error occurred in api mailsender: {e}"}
 
 
+#Billing Route
+@app.route('/my-bill', methods=['GET'])
+def fetch_my_bill():
+    try:
+        username = request.args.get('username')
+        print("username", username)
+        query = "SELECT * FROM bill WHERE username = %s"
+        cursor.execute(query, (username, ))
+        rows = cursor.fetchall()
 
+        # Fetch column names from cursor description
+        column_names = [desc[0] for desc in cursor.description]
 
+        # Convert rows to dictionaries with column names as keys
+        data = []
+        for row in rows:
+            row_dict = {}
+            for i in range(len(column_names)):
+                row_dict[column_names[i]] = row[i]
+            data.append(row_dict)
+        if data:
+            return {'data': data}, 200
+        else: 
+            return {'message': 'No Data found'}, 200
+        connection.close()
+    except psycopg2.Error as e:
+        return {'error': str(e)}, 500
+    
+
+@app.route('/enterBill', methods=['POST'])
+def enterBill():
+    try:
+         # Retrieve data from the request body
+        data = request.get_json()
+
+        # Extract data from the validated request
+        username = data.get('username')
+      
+        ton= data.get('ton')
+        rate= data.get('rate')
+        waste= data.get('waste')
+        totalton= data.get('totalton')
+        labourid= data.get('labourid')
+        date= data.get('date')
+        mobileno= data.get('mobileno')
+       
+
+        query = "INSERT INTO bill (username,  ton,  rate, waste, totalton, labourid, date, mobileno) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (username,ton,  rate, waste, totalton, labourid, date, mobileno))
+
+        if cursor.rowcount > 0:
+            connection.commit()
+            return {'data': "User Bill Entery successfull"}, 200
+        else:
+            print("We are facing issues while registration. Please try again")
+        
+        connection.close()
+    except psycopg2.Error as e:
+        return {'error': str(e)}, 500
+    
 if __name__ == '__main__':
     app.run(debug=True)

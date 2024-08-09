@@ -88,6 +88,14 @@ form a{
 }
 .form a:hover{
 	color: red;
+	text-decoration: underline;
+}
+.form img{
+	height: 15px;
+	position: absolute;
+	top:155px;
+	right: 40px;
+
 }
 @media only screen and (max-width: 600px){
 	.cont2{
@@ -103,4 +111,9 @@ form a{
 		margin-left: 0;
 		
 	}
+}
+#forgetPassword {
+     position: absolute;
+	 right: 0px;
+	 bottom: 2px;
 }

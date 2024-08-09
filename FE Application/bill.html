@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPLOAD DOCUMENT</title>
+    <title>PROFILE</title>
     <link rel="stylesheet" href="profile.css">
 
 </head>
@@ -19,46 +19,32 @@
         <a href="newproject.html"><button id="logoutButton"style="font-size:medium;">Logout</button></a>
     
     </div>
+    
     <form>
-        <div class="name"><label>Aadhar number/</label><input id="aadhar_number" type="text"></div><br>
-        <div class="name"><label>upload Aadhar/</label><input id="aadhar_document" type="file"></div><br>
+        <div class="name"><label>Tons:</label><input id="ton" type="text" disabled></div><br>
+        <div class="name"><label>Rate / Ton:</label><input id="rate" type="text" disabled></div><br>
+        <div class="name"><label>Waste:</label><input id="waste" type="text" disabled></div>
+        <br>
+        <div class="name"><label> Total Tons:</label><input id="totalton" type="text" disabled></div>
+        <div class="name"><label>Labour Id :</label><input id="labourid" type="text" disabled></div>
+        
+        <div class="name"><label>Date:</label><input id="date" type="date" disabled></div><br>
+       
+        <div class="name"><label>mobile No:</label><input id="mobileNo" type="text" disabled></div><br><br>
         <hr>
-        <div class="name"><label>Bank Account number/</label><input id="bank_acc_number" type="text"></div><br>
-        <div class="name"><label>Upload Bank Passbook</label><input id="bank_document" type="file"></div><br>
-        <hr>
-        <div class="name"><label>upload 7/12 form/</label><input id="seven_twelve_doc" type="file"></div><br>
-        <div class="name"><label>upload 8 A form/</label><input id="eight_a_doc" type="file"></div><br>
-        <hr>
-        <button type="button" onclick="documentUpload()">Save/जतन करा</button>
+        
     </form>
+  
 
     <script>
-        function documentUpload() {
+        function bill() {
             var username = localStorage.getItem("username");
-            const aadhar_number = document.getElementById('aadhar_number').value;
-            const aadhar_document = document.getElementById('aadhar_document').files[0];
-            const bank_acc_number = document.getElementById('bank_acc_number').value;
-            const bank_document = document.getElementById('bank_document').files[0];
-            const seven_twelve_document = document.getElementById('seven_twelve_doc').files[0];
-            const eight_a_document = document.getElementById('eight_a_doc').files[0];
 
-            if (!aadhar_document) {
-                alert('Please select an Aadhar Document');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('aadhar_document', aadhar_document);
-            formData.append('bank_document', bank_document);
-            formData.append('seven_twelve_document', seven_twelve_document);
-            formData.append('eight_a_document', eight_a_document);
-            formData.append('aadhar_number', aadhar_number);
-            formData.append('bank_acc_number', bank_acc_number);
-            formData.append('username', username);
-
-            fetch('http://127.0.0.1:5000/upload-document', {
-                method: 'POST',
-                body: formData
+            fetch('http://127.0.0.1:5000/my-bill?username=' + encodeURIComponent(username), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             })
                 .then(response => {
                     if (response.ok) {
@@ -67,15 +53,35 @@
                     throw new Error('Network response was not ok.');
                 })
                 .then(data => {
-                    if (data.message) {
+                    if (data.data) {
+                        populateFormFields(data?.data[0])
+                    } else if (data.message) {
                         alert(data.message);
                     }
                 })
                 .catch(error => {
                     console.error('There was an error!', error);
-                    // Show error message if there's an error in the API call
+                    alert("An error occurred. Please try again."); // Show error message if there's an error in the API call
                 });
         }
+
+        // Function to populate form fields
+        function populateFormFields(data) {
+            console.log("data", data)
+            document.getElementById("ton").value = data.ton;
+            document.getElementById("rate").value = data.rate;
+            document.getElementById("waste").value = data.waste;
+            document.getElementById("totalton").value = data.totalton;
+            document.getElementById("labourid").value = data.labourid;
+            let date = new Date(data.date);
+            let formattedDate = date.toISOString().split('T')[0]; // Extracting yyyy-MM-dd part
+            document.getElementById("date").value = formattedDate;
+            document.getElementById("mobileNo").value = data.mobileno;
+        }
+
+        // Call fetchMyProfile() function once the page loads
+        window.onload = bill();
+
     </script>
 </body>
 

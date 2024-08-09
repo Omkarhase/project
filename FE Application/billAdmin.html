@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROFILE</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+    <form>
+        <div class="name">
+            <label>Username:</label>
+            <input id="username" type="text">
+            <div id="emailError" class="error"></div>
+        </div><br>
+
+        <div class="name">
+            <label>Tons:</label>
+            <input id="ton" type="text">
+            <div id="tonError" class="error"></div>
+        </div><br>
+        
+        <div class="name">
+            <label>Rate / Ton:</label>
+            <input id="rate" type="text">
+        </div><br>
+
+        <div class="name">
+            <label>Waste:</label>
+            <input id="waste" type="text">
+        </div><br>
+
+        <div class="name">
+            <label>Total Tons:</label>
+            <input id="totalton" type="text">
+            <div id="totaltonError" class="error"></div>
+        </div><br>
+
+        <div class="name">
+            <label>Labour Id :</label>
+            <input id="labourid" type="text">
+        </div><br>
+        
+        <div class="name">
+            <label>Date:</label>
+            <input id="date" type="date">
+        </div><br>
+       
+        <div class="name">
+            <label>Mobile No:</label>
+            <input id="mobileno" type="text">
+            <div id="mobileNoError" class="error"></div>
+        </div><br><br>
+
+        <button type="button"><a href="admin_dashboard.html">Back</a></button>
+        <center><button type="button" onclick="billEntry()">Submit</button></center>
+        <hr>
+    </form>
+    <script>
+        function resetErrors() {
+            var errorFields = document.querySelectorAll('.error');
+            errorFields.forEach(function (errorField) {
+                errorField.textContent = "";
+            });
+
+            var inputFields = document.querySelectorAll('input');
+            inputFields.forEach(function (inputField) {
+                inputField.classList.remove('error-border');
+            });
+        }
+
+        function billEntry() {
+            resetErrors();
+
+            var username = document.getElementById("username").value;
+            var ton = document.getElementById("ton").value;
+            var rate = document.getElementById("rate").value;
+            var waste = document.getElementById("waste").value;
+            var totalton = document.getElementById("totalton").value;
+            var labourid = document.getElementById("labourid").value;
+            var date = document.getElementById("date").value;
+            var mobileno = document.getElementById("mobileno").value;
+
+            var isValid = true;
+
+            if (!(/^\d+$/.test(ton)) || parseInt(ton) <= 0) {
+                document.getElementById("ton").classList.add('error-border');
+                document.getElementById("tonError").textContent = "Tons must be a positive number";
+                isValid = false;
+            } 
+
+            if (!(/^\d+$/.test(totalton)) || parseInt(totalton) <= 0) {
+                document.getElementById("totalton").classList.add('error-border');
+                document.getElementById("totaltonError").textContent = "Total tons must be a positive number";
+                isValid = false;
+            } 
+
+            if (!(/^\d{10}$/.test(mobileno))) {
+                document.getElementById("mobileno").classList.add('error-border');
+                document.getElementById("mobileNoError").textContent = "Mobile number must be a 10-digit number";
+                isValid = false;
+            }
+
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(username)) {
+                document.getElementById("username").classList.add('error-border');
+                document.getElementById("emailError").textContent = "Please enter a valid email";
+                isValid = false;
+            }
+
+            if (isValid) {
+                var data = {
+                    username: username,
+                    ton: ton,
+                    rate: rate,
+                    waste: waste,
+                    totalton: totalton,
+                    labourid: labourid,
+                    date: date,
+                    mobileno: mobileno,
+                };
+
+                fetch('http://127.0.0.1:5000/enterBill', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    if (data.data) {
+                        alert(data.data);
+                    } else if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                    alert("An error occurred. Please try again.");
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

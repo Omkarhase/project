@@ -11,7 +11,7 @@
         <img src="logo.png" height="80px">
         <h1>
             <center>UPSCALE SUGAR FACTORY SOLUTION</center>
-            
+
             <h1>
     </div>
     <div class="cont2">
@@ -20,27 +20,30 @@
         <a href="admin copy.html"><button type="button">Admin login</button></a>
 
     </div>
-    
+
 
     <div class="form">
-    <form >
-        <center>
-            <h1 style="color:red;" font-family="serif;">Login</h1>
-        </center><br>
-        <label class="adi">User Name/E-mail:</label>
-        <input type="text" id="usernameInput"><br><br>
-        <label class="adi">Password:</label>
-        <input type="password" id="passwordInput"><br><br>
-        <center><button type="button" onclick="login()">Login</button><br><br></center>
-        <center><a href="registration .html"><b>New Registration</b></a></center>
-    </form>
-   </div>
+        <form>
+            <center>
+                <h1 style="color:red;" font-family="serif;">Login</h1>
+            </center><br>
+            <label class="adi">User Name/E-mail:</label>
+            <input type="text" id="usernameInput" placeholder="Enter Your E-mail"><br><br>
+            <label class="adi">Password:</label>
+            <input type="password" id="passwordInput" placeholder="Enter Your Password">
+            <img src="password.jpg" onclick="togglePassword()" style="cursor: pointer;"><br><br>
+            <center><button type="button" onclick="login()">Login</button><br><br></center>
+            <center><a href="registration .html"><b>New Registration</b></a></center>
+            <a href="ForgetPassword.html" id="forgetPassword">Forget Password</a>
+        </form>
+    </div>
     <div class="cont3">
         <span>NEWS UPDATE <br><br>
-        Contact no:-9881033442/7498687744
+            Contact no:-9881033442/7498687744
         </span>
-        <marquee direction="up"> &nbsp; &nbsp; Registration is now open you can register now :<a href="registration.html"> Click here </a><br><br>
-            &nbsp; &nbsp;13 एप्रिल  रोजी अग्नी दीपन करून या वर्षीचे गळीत हंगाम  चालु  करण्यात येईल.</marquee>
+        <marquee direction="up"> &nbsp; &nbsp; Registration is now open you can register now :<a
+                href="registration .html"> Click here </a><br><br>
+            &nbsp; &nbsp;13 एप्रिल रोजी अग्नी दीपन करून या वर्षीचे गळीत हंगाम चालु करण्यात येईल.</marquee>
     </div>
 
 
@@ -81,6 +84,15 @@
                     console.error('There was an error!', error);
                     alert("An error occurred. Please try again."); // Show error message if there's an error in the API call
                 });
+        }
+
+        function togglePassword() {
+            var passwordInput = document.getElementById("passwordInput");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
         }
     </script>
 
