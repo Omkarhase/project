@@ -1,0 +1,49 @@
+<html>
+<head>
+<style>
+img{
+    width:300px;
+}
+p::after{
+          content:"  -Hey its after psudo element";
+		  color:red;
+}
+p::before{
+           content:"Hey this is before pseudo element  :-";
+		   color:green;
+		   size:medium;
+}		   
+
+p::first-letter{
+             text-decoration:underline overline red;
+			 font-size:200%;
+}
+p::selection{
+              color:red;
+               background-color:yellow;
+}			
+h1{
+    animation-name:example;
+}	
+@keyframes example{
+             0%{background-color:red; left:0px;
+			 top:0px;}
+			 
+ 
+    
+}   
+    						  
+						  
+</style>
+</head>
+
+<body>
+<article>
+
+<h1>Wel-Come!!</h1>
+<p>This code create a simple webpage with an article tag including a heading ,a a paragraph styled with all four pesudo -element ,css animations styled with all heaing and an image with a rounded shape.</p>
+<img src="Fergusson college.jpg">
+</article>
+
+</body>
+</html>

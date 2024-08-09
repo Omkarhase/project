@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+*{
+     box-sizing:border-box;
+}
+body{
+     margin:0;
+}
+
+.header{
+       text-align:center;
+	   
+}
+.row{
+     display:flex;
+	 flex-wrap:wrap:
+	 padding:0 4px;
+}
+
+/* Create four equal cplumns that site next to each other */
+.column{
+     flex:25%;
+	 max-width:25%;
+	padding:10px;
+}
+.column img{
+     margin-top:8px;
+	 vertical-align:middle;
+}
+
+/Responsive layout -makes a teo column -layout instead of four cloumns */
+@media (max-width:800px){
+     .column{
+	     flex:50%;
+		 max-width:50%;
+	}
+}
+
+/*Respomsive layout -makes the column stack on top of each otherr instead of next to each other*/
+
+@media (max-width:600px){
+     .column{
+	     flex:100%;
+		 max-width:100%;
+	}
+}
+
+</style>
+
+
+</head>
+
+<body>
+<!-- Header-->
+<div class="header">
+
+<h1>Responsive Image Gallary</h1>
+<p>Resize the broweser to see effec</p>
+</div>
+
+
+<!--Photo Grid-->
+<div class="row">
+ <div class="column">
+  <img src="download1.jpg" style="width:100%">
+  <img src="download (2).jpg" style="width:100%">
+  <img src="download (1).jpg" style="width:100%">
+  <img src="download (3).jpg" style="width:100%">
+  <img src="download (4).jpg" style="width:100%">]
+  <img src="download (5).jpg" style="width:100%">
+ </div>
+ 
+ <div class="column">
+  <img src="download.jpg" style="width:100%">
+  <img src="images (1).jpg" style="width:100%">
+  <img src="images (2).jpg" style="width:100%">
+  <img src="images (4).jpg" style="width:100%">
+  <img src="images (5).jpg" style="width:100%">
+  <img src="images (6).jpg" style="width:100%">
+ </div>
+ 
+ <div class="column">
+  <img src="images (7).jpg" style="width:100%">
+  <img src="images (8).jpg" style="width:100%">
+  <img src="images (9).jpg" style="width:100%">
+  <img src="images (10).jpg" style="width:100%">
+  <img src="images (11).jpg" style="width:100%">
+  <img src="images (12).jpg" style="width:100%">
+ </div>
+ 
+</div>
+</div>
+</body>
+</html>

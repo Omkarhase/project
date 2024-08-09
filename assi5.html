@@ -1,0 +1,84 @@
+<html>
+<head> 
+<style>	 
+.con{
+     width:10cm;
+	 height:5cm;
+	 position:absolute;
+	 top:50%;
+	 left:50%;
+	 transform:translate(-50% ,-50%);	 
+	 box-shadow:10px 10px 10px black;
+
+}
+
+
+.f1{
+     background-color:lightblue;
+	 width:10cm;
+	 height:5cm;
+	 
+}
+label{
+     width:100px;
+	 display:inline-block;
+	 padding:10px;
+     margin-left:20px;
+	 text-align:left;
+}	
+label#age{
+     margin-left:30px;
+     padding:0px;
+}
+label.shadow{
+     text-shadow:4px 4px 4px rgba(0,0,0,0.5);
+}
+  
+input{
+     
+      display:inline-block;
+	  padding:1px;
+}
+input#in{
+      padding:2px;
+	  
+}
+input#in2{
+      margin-left:120px;
+	  
+}
+input#button{
+
+      padding:3px;
+	  border:2px thick black;
+	  border-radius:5px;
+	  border-color:seagreen;
+	  width:2cm;
+	  
+	  
+}	  
+</style>
+</head>
+
+<body>
+<div class="con">
+<form class="f1">
+<label class="shadow">User name</label><input type="text" id="in">
+<br>
+<label class="shadow">Password</label><input type="password">
+<br>
+
+<input type="radio" id="in2">
+Below 18
+<br>
+<label id="age">Age:</label> 
+<br>
+<input type="radio" id="in2" >
+Above 18
+<br><br>
+<center>
+<input type="button" value="Login" id="button">
+</center>
+</form>
+</div>
+</body>

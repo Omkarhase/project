@@ -1,0 +1,146 @@
+<!--<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            label{
+                display: block;
+                margin-bottom: 5px;
+            }
+            input[type="text"],input[type="number"]{
+                width:100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                box-sizing: border-box;
+            }
+            button{
+                background-color: #007bff;
+                color:#fff;
+                border: none;
+                border-radius: 3px;
+                padding: 10px 20px;
+                cursor: pointer;
+
+            }
+            button:hover{
+                background-color: blue;
+            }
+        </style>
+
+
+    </head>
+    <body>
+        <h2>Membership Form</h2>
+        <form id="membershipForm">
+            <label for="membername">Member Name:</label>
+            <input type="text" id="memberName" name="memberName" required><br>
+
+            <label for="contactNumber">Contact Number:</label>
+            <input type="text" id="contactNumber" name="contactNumber" required><br>
+
+            <label>Type of Plan:</label><br>
+            <label><input type="radio" name="plan" value="Silver" required>Silver</label><br>
+            <label><input type="radio" name="plan" value="Gold">Gold</label><br>
+            <label><input type="radio" name="plan" value="Platinum">Platinum</label><br>
+
+            <label for="totalBillAmount">Total Bill Amount:</label>
+            <input type="number" id="totalBillAmount" name="totalBillAmount" required><br>
+
+            <button type="button" onclick="calculateDiscount()">Calculate Discount</button>
+        </form>
+
+       <script>
+            function calculateDiscount(){
+                var totalBillAmount=parseFloat(document.getElementById("totalBillAmount").value);
+                var plan=document.querySelector('input[name="plan"]:checked').value;
+                var discount =0;
+                
+                switch(plan){
+                    case "Silver":
+                        discount = 0.1*totalBillAmount;
+                        break;
+                    case "Gold":
+                        discount=0.2*totalBillAmount;
+                        break;
+                    case "Platinum":
+                        discount=0.3*totalBillAmount;
+                        break;
+                }
+
+                var discountAmount=totalBillAmount-discount;
+                alert("Discount Amount Rs:" + discountAmount);
+            }
+        </script>
+    </body>
+</html>-->
+
+
+<html>
+    <head>
+        <style>
+            label{
+                display: block;
+                margin-bottom: 5px;
+            }
+            input[type="text"],input[type="number"]{
+                width:100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                box-sizing: border-box;
+            }
+            button{
+                background-color: #007bff;
+                color:#fff;
+                border: none;
+                border-radius: 3px;
+                padding: 10px 20px;
+                cursor: pointer;
+
+            }
+            button:hover{
+                background-color: blue;
+            }
+
+        </style>
+        
+    </head>
+    <body>
+        <h2>Membership Form</h2>
+        <form id="submit">
+            <label>Member name</label>
+            <input type="text" id="membername" name="membername" placeholder="Enter member name" required>
+
+            <label>Contact number</label>
+            <input type="text" id="contactnumber" name="contactnumber" placeholder="Enter contact number" required>
+
+            <label>Type of plans:</label><br>
+            <lable><input type="radio" name="plan" value="Silver">Silver</lable><br>
+            <label><input type="radio" name="plan" value="Gold">Gold</label>
+            <label><input type="radio" name="paln" value="Platinum">Platinum</label><br>
+
+            <label>Total Bill Amount</label>
+            <input type="number" id="totalBillAmount" name="totalBillAmount">
+            <button type="button" onclick="calculateDiscount()">Calculate Discount</button>
+        </form>
+
+        <script>
+            function calculateDiscount(){
+                var totalBillAmount=parseInt(document.getElementById("totalBillAmount").value);
+                var plan=document.querySelector('input[name="plan"]:checked').value;
+
+                switch(plan){
+                    case "Silver":
+                        discount=0.1*totalBillAmount;
+                        break
+                    case "Gold":
+                        discount=0.2*totalBillAmount;
+                        break
+                    case "Platinum":
+                        discount=0.3*totalBillAmount;
+                        break
+                }
+                discountAmount=totalBillAmount-discount;
+                alert("The discount ammount is:" + discountAmount);
+            }
+        </script>
+    </body>
+</html>

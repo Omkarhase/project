@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+
+<meta name="viewport" content="width-device-width ,initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+<div class="container mt-3">
+<h2>Stacked Form</h2>
+<div class="mb-3">    <!--Accept name: Firstname, Middlename and Lastname.-->
+   <label>First Name:</label>
+   <input type="text" class="form-control" placeholder="Enter First Name">
+   <label>Second Name:</label>
+   <input type="text" class="form-control" placeholder="Enter Second name">
+   <label>Last name:</label>
+   <input type="text" class="form-control" placeholder="Entr Last Name">
+  </div> 
+   <label>Birthdate:</label>                                      <!--Birthdate-->
+   <input type="date" class="form-control" >   
+   
+   <strong>Gender:</strong> &nbsp;                                  <!--Gender (radio button)-->
+   <span>Male:<input type="radio" class="form-check-input"></span>	
+   <span>Female:<input type="radio" class="form-check-input"></span><br><br>
+   
+   <strong>Address:</strong>                                         <!--Adress using text area-->
+   <textarea class="form-control" rows="5"></textarea><br>
+   
+   <strong>Please Select your experience</strong>                     <!--Years of experience in dropdown (select)-->
+   <div class="dropdown mt-3">
+   <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Select experience</button>
+   
+   <ul class="dropdown-menu">
+   <li class="dropdown-item">2 years</li>
+   <li class="dropdown-item">3 Years</li>
+   <li class="dropdown-item">4 Yreas</li>
+   <li class="dropdown-item">More than 5 Years</li>
+   </ul>   
+   </div><br>
+   
+   <strong>Skillset:</strong>                <!--Skillset: use Multiple Select-->
+   <div class="dropdown mt-3">
+   C++:<input type="checkbox" class="form-check-input"><br>
+   python:<input type="checkbox" class="form-check-input"><br>
+   Web:<input type="checkbox" class="form-check-input"> 
+   </div>
+   
+ <div class="container mt-3">        <!--Hobbies: check boxes-->
+   <strong>Hobbies</strong><br> 
+   <label class="form-label">Cricket:</label>
+   <input type="radio" class="form-check-input"><br>
+   <label class="form-label">Kabbadi:</label>
+   <input type="radio" class="form-check-input"><br>
+   <label class="form-label">Games:</label>
+   <input type="radio" class="form-check-input"><br>
+  </div><br>
+
+<div class="form-floating mb-3">                           <!--	Use floating labels.-->
+<input type="email" class="form-control" placeholder="Enter the eamil">
+<label for="email">Enter Email</label>
+</div> 
+<div class="form-floating mb-3">
+<input type="password" class="form-control" placeholder="Enter password" >
+<label>Password</label>
+</div><br>
+
+<form class="was-validated">
+	<div class="mb-3 mb-3">
+	<label class="form-label">Username:</label>
+	<input type="text" class="form-control" placeholder="Enter a user name" required>
+	<div class="valid-feedback">valid</div>
+	<div class="invalid-feedback">Pleas Fill out the field</div>
+	</div>
+	
+ <div class="mb-3 mb-3">
+ <label for="password" class="form-label">
+ <input type="text" class="form-control" placeholder="Enter the password" required>
+ <div class="valid-feedback">Valid</div>
+ <div class="invalid-feedback">Please Fill Password</div>
+ </div>
+ 
+ <div class="form-check mb-3">
+ <input type="checkbox" class="form-check-input" required>
+ <label class="form-check-label" >I agree on blabla</label>
+ <div class="valid-feedback">Valid</div>
+ <div class="invalid-feedback">Please check the box</div>
+ 
+ </div>
+</form>
+
+</div>
+
+</body>
+
+</html>

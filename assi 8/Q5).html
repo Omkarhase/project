@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="demo">eihfsjgjg jbbfjsjssdjbjjbsbgsfjfsgsg jlsssrsrsrgsrlsfnsklsdsgggjsgjsjggg
+            sgsgnsjgbsjgsjgsjgsgjsgslkfjslhsfiishfiflhslfhsfsf jfnssnfjsdnfsdfhslfsf sdfjssdfhsfnsflnsf sfjfsdlfsdflsfsdflfilfgkfgdfgjfgfg
+            sfjsfsfhsfhsfs omkar afuff hase omya deshmukh deshmukh 
+        </p>
+
+        <script>
+            var paragraph=document.getElementById("demo").innerHTML;
+
+            var index=paragraph.indexOf("omkar");
+            var lastIndexof=paragraph.lastIndexOf("deshmukh");
+            var search=paragraph.search("omkar");
+            var substring=paragraph.substring(10,25);
+            var substr=paragraph.substr(12,25);
+
+            document.write("<p>The Index 'omkar:" +index+ "</p>");
+            document.write("<p> the lastIndexof 'deshmukh:" + lastIndexof+ "</p>");
+            document.write("<p> The search index of 'omkar:"  + search+ "</p>");
+            document.write("<p> The Substring is:" +substring+ "</p>");
+            document.write("<p> The substr is:" +substr+ "</p>");
+
+        </script>
+    </body>
+</html>

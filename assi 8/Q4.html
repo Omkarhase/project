@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <h1>Find Minimum </h1>
+	<button type="button" onclick="findMinMax()"> click here</button>
+    <p id="demo" ></p>
+	
+    <script>
+        function findMinMax(){
+            var numbers = [];  //Array to store input numbers
+
+            for (var i = 0; i < 5; i++) {
+                //get  user input and add it to the array
+                var input = prompt("Enter a number");
+
+                numbers.push(parseInt(input));
+
+            }
+
+            var Minimum = Math.min(...numbers);
+            var Maximum = Math.max(...numbers);
+
+           document.getElementById("demo").innerHTML= "The minimum number is :" + Minimum + "<br> The maximum number is:" + Maximum;
+
+           
+        }
+        
+
+
+    </script>
+</body>
+
+</html>

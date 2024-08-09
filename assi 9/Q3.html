@@ -1,0 +1,44 @@
+<!Doctype html>
+<html>
+
+<head>
+<style>
+body{
+      text-align:center;
+}
+p{
+     background-color:lightblue;
+	 color:black;
+	 width:10cm;
+	 margin:auto;
+}
+button{
+      background-color:aqua;
+	  border:none;
+	  border-radius:5px;
+}
+button:hover{
+     background-color:lightblue;
+}
+</style>
+</head>
+
+<body>
+<h1>This is Assignment 3</h1>
+<p id="demo"></p>
+<button onclick="concate()">CONCATE</button>
+
+<script>
+function concate(){
+      var ar1=[1,2,3];
+	  var ar2=['a','b','c'];
+	  
+	  result=ar1.concat(ar2);
+	  
+	  document.getElementById("demo").innerHTML= "The concat array is: " + result;
+}
+
+</script>
+</body>
+
+</html>

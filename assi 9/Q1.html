@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+body{
+     text-align:center;
+}
+h1{
+    font-family:arial;
+	color:green;
+}
+p{
+  border: solid red 1px;
+  width:5cm;
+  margin:auto;
+  
+}
+</style>
+</head>
+
+<body>
+<h1> This is Assignment 1 from 9</h1>
+
+<p id="month"></p>
+
+<script>
+function getMonth(){
+       var now = new Date();
+	  var date=now.getMonth();
+	  var months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+	  
+	  var currentMonth=months[date];
+	  
+	  return currentMonth;
+	  
+}
+function showMonth(){
+     document.getElementById("month").textContent="The current month is:" +getMonth();
+}
+showMonth();
+</script>
+</body>
+
+</html>
